@@ -1,0 +1,20 @@
+{
+  "name": "nodejs",
+  "version": "1.0.0",
+  "description": "Learn Nodejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "run-test"
+  },
+  "author": "dathh",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-validator": "^7.0.1",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.9.1",
+    "pug": "^3.0.2",
+    "socket.io": "^4.7.4"
+  }
+}
