@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create User</title>
+  <link rel="stylesheet" href="./public/css/style.css">
+</head>
+<body>
+<% if(typeof body === 'undefined'){ var body = false; } %>
+  <div class="container">
+    <h1 class="heading"><%- (typeof body.user_id !== 'undefined') ? 'Edit' : 'Create' %> User</h1>
+    <div class="form">
+      <form action="" method="POST">
+        <input type="text" name="user_id" id="user_id" value="<%- (typeof body.user_id !== 'undefined') ? body.user_id : '' %>" hidden>
+        <label for="user_name">Name: <span class="error-msg title"></span></label>
+        <input type="text" name="user_name" id="user_name" placeholder="Name" value="<%- (typeof body.user_name !== 'undefined') ? body.user_name : '' %>">
+        <label for="user_email">Email: <span class="error-msg author"></span></label>
+        <input type="text" name="user_email" id="user_email" placeholder="User email" value="<%- (typeof body.user_email !== 'undefined') ? body.user_email : '' %>">
+        <label for="password">Password: <span class="error-msg author"></span></label>
+        <input type="text" name="password" id="password" placeholder="Password" value="<%- (typeof body.password !== 'undefined') ? body.password : '' %>">
+        <!-- <label for="confirm_password">Confirm password: <span class="error-msg author"></span></label>
+        <input type="text" name="confirm_password" id="confirm_password" placeholder="Confirm password" value="<%- (typeof body.password !== 'undefined') ? body.password : '' %>"> -->
+        <button type="submit"><%- (typeof body.user_id !== 'undefined') ? 'Save' : 'Create' %></button>
+        <a class="back-to-list-button" href="/user/list">Back to list</a>
+      </form>
+    </div>
+  </div><% if(typeof validationErrors !== "undefined"){ %>
+    <script>
+      let spanItem;
+      let item;
+      const validationErrors = <%- validationErrors %>;  
+      for(i of validationErrors){
+        spanItem = document.querySelector(`.error-msg.${i.path}`);
+        item = document.querySelector(`[name="${i.path}"]`);
+        item.classList.add('error');
+        spanItem.innerText = i.msg;
+      }
+    </script>
+  <% } %>
+</body>
+</html>

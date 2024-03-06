@@ -1,0 +1,51 @@
+<!-- this class only use to validate token when use ejs engine  -->
+<h1>asd</h1>
+<script>
+//     $.ajax({
+//    url: '/login/checklogin',
+//    type: 'GET',
+//    contentType: 'application/json',
+//    headers: {
+//       'Authorization': 'Bearer <token>'
+//    },
+//    success: function (result) {
+    // if (result.type === 'post') {
+    //     var xhr = new XMLHttpRequest();
+    //     xhr.open("POST", result.url, true);
+    //     xhr.setRequestHeader('Content-Type', 'application/json');
+    //     xhr.send(JSON.stringify({
+    //         value: value
+    //     }))
+    //     return;
+    // }
+    function onload()
+{
+    var xhr = new XMLHttpRequest();
+    // we defined the xhr
+    // res.setHeader('Authorization', 'Bearer ' + token); 
+
+    xhr.onreadystatechange = function () {
+        if (this.readyState != 4) return;
+
+        if (this.status == 200) {
+            var data = JSON.parse(this.responseText);
+
+            // we get the returned data
+        }
+
+        // end of state change: it can be after some time (async)
+    };
+    xhr.setRequestHeader('Authorization', 'Bearer ');
+
+    xhr.open('GET', '/', true);
+    xhr.send();
+    window.location.href = '/'
+}
+    
+//    },
+//    error: function (error) {
+//     window.location.href = ":3000";
+//    }
+// });
+// document.location.href = "/";
+</script>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User List</title>
+  <link rel="stylesheet" href="./public/css/style.css">
+</head>
+<body>
+  <script src="/socket.io/socket.io.js"></script>
+  <div class="container">
+    <h1 class="heading">All User</h1>
+    <div class="user-list"><% if(typeof users !== "undefined" && users.length){ %>
+      <a class="create-user-button" href="/user/create">Create User</a>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody><% for(user of users) {%>
+          <tr>
+            <td><%- user.user_id %></td>
+            <td><%- user.user_name %></td>
+            <td><a class="view-user" href="/user/detail/id/<%- user.user_id %>"><%- user.user_email %></a></td>
+            <td><a href="/user/detail/id/<%- user.user_id %>" class="edit">✎Edit</a><a href="/user/delete/" onclick="deleteMe(event,<%- user.user_id %>)" class="del">Delete</a></td>
+          </tr>
+          <%} %>
+        </tbody>
+      </table>
+      <script>
+        function deleteMe(e,i){
+          e.preventDefault();
+          if(confirm("Do you want to delete the user?")){
+            window.location.href = e.target.getAttribute("href")+i;
+          }
+        }
+        const socket = io.connect('http://localhost:3000/user/list');
+
+        socket.on('connect', function() {
+            socket.emit('join', "hello server");
+        });
+      </script>
+      <% }else{%>
+        <p>😊 Please <a href="/create"><strong>insert</strong></a> some users.</p>
+        <%} %>
+    </div>
+  </div>
+</body>
+</html>
